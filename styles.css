@@ -1,0 +1,61 @@
+*{
+    border-radius:7px;
+}
+.error{
+    background: red;
+    font-family: "Arial", monospace;
+    font-size: 14pt;
+}
+table{
+    margin: auto;
+    text-align: center;
+    border-collapse: separate;
+    table-layout: fixed;
+    background: inherit;
+}
+body{
+    background: #7309aa;
+}
+th{
+    font-family: "Arial", monospace;
+    font-size: 14pt;
+}
+.slot{
+    padding: 25px 25px;
+}
+.header{
+    width: 1280px;
+    margin: auto;
+    font-family: "fantasy", monospace;
+    font-size: 24pt;
+    background: #8eeb00;
+    border-radius:30px;
+    text-align: center;
+}
+.interactive_part {
+    width: 900px;
+    font-family: "fantasy", monospace;
+    font-size: 20pt;
+    text-decoration-color: black;
+}
+.input_part {
+    font-family: "Tahoma", monospace;
+    font-size: 16pt;
+    text-decoration-color: black;
+    padding: 25px 25px;
+    background: #ffcf00;
+    border-radius:30px;
+}
+.r_button {
+    font-family: "Calibri", monospace;
+    font-size: 14pt;
+    text-decoration-color: black;
+}
+.selected {
+    color: red;
+    transform: scale(1.2);
+}
+.r_button:hover, .checkbox:hover, #paramY{
+    color: blue;
+    transform: scale(1.2);
+}

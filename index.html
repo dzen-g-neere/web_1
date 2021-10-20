@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dmitrii Zalevskii WebLab 1</title>
+    <link href="styles.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<table>
+
+    <tr>
+        <td>
+            <table class="header">
+                <tr>
+                    <td>Вариант 12008</td>
+                    <td>WEB-LAB-1</td>
+                    <td>Дмитрий Залевский P3212</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <table class="interactive_part">
+                <tr>
+                    <td>
+                        <img src="img.png" class="input_part">
+                    </td>
+                    <td>
+                        <form method="get" action="script.php">
+                            <table>
+                                <tr>
+                                    <td class="input_part">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    Введите параметр X
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table>
+                                                        <tr>
+                                                            <th>-4</th>
+                                                            <th>-3</th>
+                                                            <th>-2</th>
+                                                            <th>-1</th>
+                                                            <th>0</th>
+                                                            <th>1</th>
+                                                            <th>2</th>
+                                                            <th>3</th>
+                                                            <th>4</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><input type="checkbox" class="checkbox"
+                                                                        name="X[]" value="-4"></td>
+                                                            <td><input type="checkbox" class="checkbox"
+                                                                        name="X[]" value="-3"></td>
+                                                            <td><input type="checkbox" class="checkbox"
+                                                                        name="X[]" value="-2"></td>
+                                                            <td><input type="checkbox" class="checkbox"
+                                                                        name="X[]" value="-1"></td>
+                                                            <td><input type="checkbox" class="checkbox"
+                                                                        name="X[]" value="0"></td>
+                                                            <td><input type="checkbox" class="checkbox"
+                                                                        name="X[]" value="1"></td>
+                                                            <td><input type="checkbox" class="checkbox"
+                                                                        name="X[]" value="2"></td>
+                                                            <td><input type="checkbox" class="checkbox"
+                                                                        name="X[]" value="3"></td>
+                                                            <td><input type="checkbox" class="checkbox"
+                                                                        name="X[]" value="4"></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="input_part">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    Введите параметр Y
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input type="text" maxlength="8" name="yValue" id="paramY"
+                                                           pattern="-?([0-4])([.,][0-9]+)?"
+                                                           step="0.01"
+                                                           title="Y should be float number in range (-5, 5)">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="input_part">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    Введите параметр R
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table>
+                                                        <tr>
+                                                            <td>
+                                                                <input class="r_button selected" onclick="r1_0()"
+                                                                       type="button" value="1.0"
+                                                                       id="rBut1_0">
+                                                            </td>
+                                                            <td>
+                                                                <input class="r_button" onclick="r1_5()" type="button"
+                                                                       value="1.5"
+                                                                       id="rBut1_5">
+                                                            </td>
+                                                            <td>
+                                                                <input class="r_button" onclick="r2_0()" type="button"
+                                                                       value="2.0"
+                                                                       id="rBut2_0">
+                                                            </td>
+                                                            <td>
+                                                                <input class="r_button" onclick="r2_5()" type="button"
+                                                                       value="2.5"
+                                                                       id="rBut2_5">
+                                                            </td>
+                                                            <td>
+                                                                <input class="r_button" onclick="r3_0()" type="button"
+                                                                       value="3.0"
+                                                                       id="rBut3_0">
+                                                            </td>
+                                                            <td><input id="valueR" name="rValue" type="hidden"
+                                                                       value="1.0"></td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="input_part">
+                                        <input type="submit" value="Отправить" id="butSend">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label class="error" id="errorX" hidden>
+                                            Выберите одно значение X
+                                        </label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label class="error" id="errorY" hidden>
+                                            Введите значение Y (-5, 5)
+                                        </label>
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+<script src="validator.js"></script>
+</body>
+</html>
