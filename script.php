@@ -3,6 +3,7 @@ session_start();
 date_default_timezone_set('Europe/Moscow');
 $hit = 0;
 $max_length = 8;
+$saves = array();
 function check_hit($x, $y, $r)
 {
     global $hit;
@@ -46,6 +47,35 @@ function validate($x, $y, $r)
 }
 
 
+function pushResult($x, $y, $r){
+    validate($x, $y, $r);
+    global $saves, $validated;
+    $saves = array();
+    if (isset($_SESSION["saves"])) {
+        $saves = unserialize($_SESSION["saves"]);
+    } else {
+        $saves = array();
+    }
+    if ($validated) {
+        global $hit, $x, $y, $r;
+        check_hit($x, $y, $r);
+        $is_hit = $hit;
+        $curr = array(
+            "x" => $x,
+            "y" => $y,
+            "r" => $r,
+            "is_hit" => $is_hit
+        );
+        array_push($saves, $curr);
+        $_SESSION["saves"] = serialize($saves);
+
+    } else echo '<label class="error">
+                Неверные входные значения
+            </label>';
+
+}
+
+
 if ($_SERVER["REQUEST_METHOD"] !== "GET") {
     http_response_code(400);
     exit;
@@ -65,6 +95,18 @@ if (isset($x) and is_numeric($x) and
     isset($y) and is_numeric($y) and
     isset($r) and is_numeric($r)) {
     global $x, $X, $y, $r;
+    $y = str_replace(',', '.', $y);
+    $r = str_replace(',', '.', $r);
+
+    if (strlen($y) > $max_length) {
+        $y = substr($y, 0, $max_length);
+    }
+
+    if (strlen($r) > $max_length) {
+        $r = substr($r, 0, $max_length);
+    }
+    $y = (float)$y;
+    $r = (float)$r;
     foreach ($X as $element) {
         if (is_numeric($element) and trim($element) !== "" and (
                 (float)($element) == -4 or (float)($element) == -3 or
@@ -74,46 +116,17 @@ if (isset($x) and is_numeric($x) and
                 (float)($element) == 4)) {
             $x = str_replace(',', '.', $element);
             $x = (float)$element;
+            pushResult($x, $y, $r);
         }
-    }
-    $y = str_replace(',', '.', $y);
-    $r = str_replace(',', '.', $r);
-
-    if (strlen($y) > $max_length) {
-        $y = substr($y, 0, $max_length);
-    }
-    if (strlen($x) > $max_length) {
-        $x = substr($x, 0, $max_length);
-    }
-    if (strlen($r) > $max_length) {
-        $r = substr($r, 0, $max_length);
-    }
-    $y = (float)$y;
-    $r = (float)$r;
-}
-$saves = array();
-validate($x, $y, $r);
-if (isset($_SESSION["saves"])) {
-    $saves = unserialize($_SESSION["saves"]);
-} else {
-    $saves = array();
-}
-if ($validated) {
-    global $hit, $x, $y, $r, $saves;
-    check_hit($x, $y, $r);
-    $is_hit = $hit;
-    $curr = array(
-        "x" => $x,
-        "y" => $y,
-        "r" => $r,
-        "is_hit" => $is_hit
-    );
-    array_push($saves, $curr);
-    $_SESSION["saves"] = serialize($saves);
-
-} else echo '<label class="error">
+        else {
+            echo '<label class="error">
                 Неверные входные значения
             </label>';
+            break;
+        }
+    }
+
+}
 
 echo '
     <!DOCTYPE html>
@@ -139,6 +152,13 @@ echo "
             <th>Наличие попадания</th>
         </tr>
 ";
+if ($saves == array()){
+    if (isset($_SESSION["saves"])) {
+        $saves = unserialize($_SESSION["saves"]);
+    } else {
+        $saves = array();
+    }
+}
 foreach ($saves as $element) {
     echo "
         <tr>
