@@ -1,5 +1,6 @@
 <?php
 session_start();
+date_default_timezone_set('Europe/Moscow');
 $hit = 0;
 $max_length = 8;
 function check_hit($x, $y, $r)
@@ -8,39 +9,33 @@ function check_hit($x, $y, $r)
     if ($x >= 0 and $y <= 0) {
         if ($x <= $r and $y >= -$r / 2) {
             $hit = 1;
-
         } else {
             $hit = 0;
         }
-        echo 1;
     } else if ($x <= 0 and $y <= 0) {
         if ($x + $y <= $r / 2) {
             $hit = 1;
-
         } else {
             $hit = 0;
         }
-        echo 2;
     } else if ($x <= 0 and $y >= 0) {
-        if ($x * $x + $y * $y <= $r * $r / 4) {
+        if ($x * $x + $y * $y <= $r * $r) {
             $hit = 1;
-            echo 1;
         } else {
             $hit = 0;
         }
     } else $hit = 0;
-
 }
 
 $validated = 0;
 function validate($x, $y, $r)
 {
     global $validated;
-    if (
-        ($x === -4.0 or $x === -3.0 or $x === -2.0 or $x === -1.0 or $x == 0.0 or
+    if (is_numeric($x) and is_numeric($y) and is_numeric($r) and
+        ($x === -4.0 or $x === -3.0 or $x === -2.0 or $x === -1.0 or (float)$x === 0.0 or
             $x === 1.0 or $x === 2.0 or $x === 3.0 or $x === 4.0)
         and
-        -5.00000000 < $y and $y < 5.00000000
+        -5.000 < (float)$y and (float)$y < 5.000
         and
         ($r === 1.0 or $r === 1.5 or $r === 2.0 or $r == 2.5 or $r == 3.0)
     ) {
@@ -66,10 +61,12 @@ $x = -999.0;
 $y = $_GET["yValue"];
 $r = $_GET["rValue"];
 
-if (isset($x) and isset($y) and isset($r)) {
+if (isset($x) and is_numeric($x) and
+    isset($y) and is_numeric($y) and
+    isset($r) and is_numeric($r)) {
     global $x, $X, $y, $r;
     foreach ($X as $element) {
-        if (trim($element) !== "" and (
+        if (is_numeric($element) and trim($element) !== "" and (
                 (float)($element) == -4 or (float)($element) == -3 or
                 (float)($element) == -2 or (float)($element) == -1 or
                 (float)($element) == 0 or (float)($element) == 1 or
@@ -82,10 +79,6 @@ if (isset($x) and isset($y) and isset($r)) {
     $y = str_replace(',', '.', $y);
     $r = str_replace(',', '.', $r);
 
-    if (!is_numeric($x) || !is_numeric($y) || !is_numeric($r)) {
-        echo "Неверные входные данные";
-        $validated = false;
-    }
     if (strlen($y) > $max_length) {
         $y = substr($y, 0, $max_length);
     }
@@ -100,7 +93,11 @@ if (isset($x) and isset($y) and isset($r)) {
 }
 $saves = array();
 validate($x, $y, $r);
-
+if (isset($_SESSION["saves"])) {
+    $saves = unserialize($_SESSION["saves"]);
+} else {
+    $saves = array();
+}
 if ($validated) {
     global $hit, $x, $y, $r, $saves;
     check_hit($x, $y, $r);
@@ -111,17 +108,10 @@ if ($validated) {
         "r" => $r,
         "is_hit" => $is_hit
     );
-    if (isset($_SESSION["saves"])) {
-        global $saves;
-        $saves = unserialize($_SESSION["saves"]);
-    } else {
-        global $saves;
-        $saves = array();
-    }
     array_push($saves, $curr);
     $_SESSION["saves"] = serialize($saves);
 
-} else echo "Неверные входные данные";
+} else echo '<script>alert("Неверные входные значения")</script>';
 
 echo '
     <!DOCTYPE html>
@@ -139,9 +129,6 @@ echo '
 echo "
     <br>
     <br>
-    <br>
-    <br>
-    <br>
     <table class='interactive_part input_part'>
         <tr>
             <th>X</th>
@@ -150,7 +137,6 @@ echo "
             <th>Наличие попадания</th>
         </tr>
 ";
-
 foreach ($saves as $element) {
     echo "
         <tr>
@@ -171,6 +157,11 @@ echo "</tr>";
 echo "<tr>";
 echo "<td class='input_part'>";
 echo "Время работы скрипта: " . (microtime(true) - $start) . " мс";
+echo "</td>";
+echo "</tr>";
+echo "<tr>";
+echo "<td class='input_part'>";
+echo "<a href='https://se.ifmo.ru/~s309584/'>Вернуться на главную</a>";
 echo "</td>";
 echo "</tr>";
 echo "</table>";

@@ -24,7 +24,7 @@ th{
     padding: 25px 25px;
 }
 .header{
-    width: 1280px;
+    width: 100%;
     margin: auto;
     font-family: "fantasy", monospace;
     font-size: 24pt;
@@ -33,15 +33,15 @@ th{
     text-align: center;
 }
 .interactive_part {
-    width: 900px;
+    width: 50%;
     font-family: "fantasy", monospace;
     font-size: 20pt;
     text-decoration-color: black;
 }
 .input_part {
     font-family: "Tahoma", monospace;
-    font-size: 16pt;
-    text-decoration-color: black;
+    font-size: 14pt;
+    text-decoration-color: inherit;
     padding: 25px 25px;
     background: #ffcf00;
     border-radius:30px;
