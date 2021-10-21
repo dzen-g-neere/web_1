@@ -111,7 +111,9 @@ if ($validated) {
     array_push($saves, $curr);
     $_SESSION["saves"] = serialize($saves);
 
-} else echo '<script>alert("Неверные входные значения")</script>';
+} else echo '<label class="error">
+                Неверные входные значения
+            </label>';
 
 echo '
     <!DOCTYPE html>
