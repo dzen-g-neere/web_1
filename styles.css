@@ -55,7 +55,7 @@ th{
     color: red;
     transform: scale(1.2);
 }
-.r_button:hover, .checkbox:hover, #paramY{
+.r_button:hover, .checkbox:hover{
     color: blue;
     transform: scale(1.2);
 }
