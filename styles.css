@@ -3,7 +3,7 @@
 }
 .error{
     background: red;
-    font-family: "Arial", monospace;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
     font-size: 14pt;
 }
 table{
@@ -17,7 +17,7 @@ body{
     background: #7309aa;
 }
 th{
-    font-family: "Arial", monospace;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
     font-size: 14pt;
 }
 .slot{
@@ -29,20 +29,21 @@ th{
 }
 .header{
     width: 100%;
+    table-layout: fixed;
     margin: auto;
-    font-family: "fantasy", monospace;
+    font-family: "DejaVu Sans Mono", monospace;
     font-size: 24pt;
     background: #8eeb00;
     border-radius:30px;
     text-align: center;
 }
 .interactive_part {
-    font-family: "fantasy", monospace;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
     font-size: 20pt;
     text-decoration-color: black;
 }
 .input_part {
-    font-family: "Tahoma", monospace;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
     font-size: 20pt;
     text-decoration-color: inherit;
     padding: 25px 25px;
@@ -50,7 +51,7 @@ th{
     border-radius:30px;
 }
 .r_button {
-    font-family: "Calibri", monospace;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
     font-size: 14pt;
     text-decoration-color: black;
 }
