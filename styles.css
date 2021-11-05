@@ -10,7 +10,7 @@ table{
     margin: auto;
     text-align: center;
     border-collapse: separate;
-    table-layout: fixed;
+    table-layout: auto;
     background: inherit;
 }
 body{
@@ -23,6 +23,10 @@ th{
 .slot{
     padding: 25px 25px;
 }
+.page{
+    width: 100%;
+    margin: auto;
+}
 .header{
     width: 100%;
     margin: auto;
@@ -33,14 +37,13 @@ th{
     text-align: center;
 }
 .interactive_part {
-    width: 50%;
     font-family: "fantasy", monospace;
     font-size: 20pt;
     text-decoration-color: black;
 }
 .input_part {
     font-family: "Tahoma", monospace;
-    font-size: 14pt;
+    font-size: 20pt;
     text-decoration-color: inherit;
     padding: 25px 25px;
     background: #ffcf00;

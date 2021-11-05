@@ -17,9 +17,11 @@ var r_buttons = document.getElementsByClassName("r_button");
 
 document.querySelector("#butSend").onclick = function (event) {
     event.preventDefault()
-    if (!isNumber(text_field.value) || Math.abs(+text_field.value) > 5 ||
+    if (!isNumber(text_field.value) || Math.abs(text_field.value) > 5 ||
         text_field.value === "" || !isChecked(checkboxes)) {
-        if(!isNumber(text_field.value) || Math.abs(+text_field.value) > 5 ||
+        errorY.hidden = true;
+        errorX.hidden = true;
+        if(!isNumber(text_field.value) || Math.abs(text_field.value) > 5 ||
             text_field.value === ""){
             errorY.hidden = false;
         }
